@@ -1,8 +1,9 @@
 import pygame as pg
-import matplotlib.image as mpimg
 
-
-windowsSize=(777.5,777.5)
+windowsSize=(1000,777.5)
 gameName='Hungry Snake'
 imageBackGround = pg.image.load('background.png')
-imageBackGroundLocation = (0,0)
+imageBackGroundLocation = (223,0)
+scoreLabel = "SCORE"
+timeLabel = "TIME"
+rankLabel = "RANK"
