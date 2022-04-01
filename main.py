@@ -12,6 +12,7 @@ wd = pg.display.set_mode(st.windowsSize)
 #設定Surface
 sf = pg.Surface(wd.get_size())
 sf.blit(st.imageBackGround,st.imageBackGroundLocation)
+sf.blit(st.imageApple,st.getRandomAppleLocation())
 wd.blit(sf,(0,0))
 
 pg.draw.rect(sf,(255,0,0),st.rectTime)
@@ -24,7 +25,6 @@ sf.blit(st.txtRank,st.txtRank.get_rect(center=st.rectRank.center))
 wd.blit(sf,(0,0))
 
 pg.display.update()
-
 
 while True:
     for event in pg.event.get():
