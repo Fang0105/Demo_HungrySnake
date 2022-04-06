@@ -1,7 +1,7 @@
 import pygame as pg
 import setting as st
-import sys
-from pygame.locals import QUIT
+import event
+import apple
 
 pg.init()
 
@@ -12,7 +12,11 @@ wd = pg.display.set_mode(st.windowsSize)
 #設定Surface
 sf = pg.Surface(wd.get_size())
 sf.blit(st.imageBackGround,st.imageBackGroundLocation)
-sf.blit(st.imageApple,st.getRandomAppleLocation())
+sf.blit(st.imageApple,apple.getRandomAppleLocation())
+'''
+sf.blit(st.imageSnakeHead,(222.5+st.latticeSize*5,st.latticeSize*5))
+sf.blit(st.imageSnakeBody,(222.5+st.latticeSize*5,st.latticeSize*6))
+'''
 wd.blit(sf,(0,0))
 
 pg.draw.rect(sf,(255,0,0),st.rectTime)
@@ -26,8 +30,4 @@ wd.blit(sf,(0,0))
 
 pg.display.update()
 
-while True:
-    for event in pg.event.get():
-        if event.type == QUIT:
-            pg.quit()
-            sys.exit()
+event.event()

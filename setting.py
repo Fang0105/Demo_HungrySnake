@@ -22,6 +22,8 @@ imageApple = pg.image.load('apple.png')
 imageApple = pg.transform.scale(imageApple,(latticeSize,latticeSize))
 imageAppleLocation = ""
 
-def getRandomAppleLocation():
-    imageAppleLocation = (222.5 + latticeSize * random.randint(0, 15), 0 + latticeSize * random.randint(0, 15))
-    return imageAppleLocation
+imageSnakeHead = pg.image.load('snakeHead.png')
+imageSnakeHead = pg.transform.scale(imageSnakeHead,(latticeSize,latticeSize))
+imageSnakeBody = pg.image.load('snakeBody.png')
+imageSnakeBody = pg.transform.scale(imageSnakeBody,(latticeSize,latticeSize))
+
