@@ -1,4 +1,3 @@
-
 import pygame as pg
 
 pg.init()
@@ -17,13 +16,13 @@ rectScore = pg.Rect(0,200,222.5,50)
 txtRank = font.render("Rank",True,(255,255,0))
 rectRank = pg.Rect(0,400,222.5,50)
 
-def transformCoordinateTolocation(x,y):
-    location = (222.5+latticeSize*x,latticeSize*y)
+def transformLocationToCoordinate(location):
+    location = (222.5+latticeSize*location[0],latticeSize*location[1])
     return location
 
 imageApple = pg.image.load('apple.png')
 imageApple = pg.transform.scale(imageApple,(latticeSize,latticeSize))
-imageAppleLocation = ""
+imageAppleLocation = (None,None)
 
 imageSnakeHead = pg.image.load('snakeHead.png')
 imageSnakeHead = pg.transform.scale(imageSnakeHead,(latticeSize,latticeSize))
@@ -36,19 +35,13 @@ direction = "right"
 def rotateSnakeHead(degree,ls,sf,wd):
     ls[0].image = pg.transform.rotate(ls[0].image, degree)
     sf.blit(imageBackGround, imageBackGroundLocation)
-    sf.blit(imageApple, imageAppleLocation)
-    sf.blit(ls[0].image, ls[0].location)
-    sf.blit(ls[1].image, ls[1].location)
-    sf.blit(ls[2].image, ls[2].location)
+    sf.blit(imageApple, transformLocationToCoordinate(imageAppleLocation))
+    sf.blit(ls[0].image, transformLocationToCoordinate(ls[0].location))
+    sf.blit(ls[1].image, transformLocationToCoordinate(ls[1].location))
+    sf.blit(ls[2].image, transformLocationToCoordinate(ls[2].location))
     wd.blit(sf, (0, 0))
     pg.display.update()
-    '''
-    game.listSnake[0].image = pg.transform.rotate(game.listSnake[0].image,270)
-    sf.blit(st.imageBackGround, st.imageBackGroundLocation)
-    sf.blit(st.imageApple, st.imageAppleLocation)
-    sf.blit(game.listSnake[0].image, game.listSnake[0].location)
-    sf.blit(game.listSnake[1].image, game.listSnake[1].location)
-    sf.blit(game.listSnake[2].image, game.listSnake[2].location)
-    wd.blit(sf, (0, 0))
-    pg.display.update()
-    '''
+
+setLocation = set()
+
+gameStop = False
