@@ -1,8 +1,6 @@
 import setting as st
 import abc
 import apple
-import frame
-import pygame as pg
 
 class Snake:
     location = (None,None)
@@ -28,8 +26,7 @@ class SnakeHead(Snake):
        else:
            if self.location in st.setLocation:
                if self.location == st.imageAppleLocation:
-                   print("hit apple")
-                   apple.generateNewApple(frame.sf,frame.wd)
+                   apple.generateNewApple()
                    boolIsCollision =  False
                else:
                    print("hit body")
@@ -53,6 +50,7 @@ class SnakeHead(Snake):
         elif self.direction == "down":
             self.location = (self.location[0],self.location[1]+1)
         if self.isCollision():
+            print("gameStop : ",end="")
             print(st.gameStop)
             self.location = tmp
         else:
