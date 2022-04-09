@@ -30,18 +30,22 @@ imageSnakeHead = pg.transform.rotate(imageSnakeHead,270)
 imageSnakeBody = pg.image.load('snakeBody.png')
 imageSnakeBody = pg.transform.scale(imageSnakeBody,(latticeSize,latticeSize))
 
+listSnake = []
+
 direction = "right"
 
-def rotateSnakeHead(degree,ls,sf,wd):
-    ls[0].image = pg.transform.rotate(ls[0].image, degree)
+def rotateSnakeHead(degree,sf,wd):
+    listSnake[0].image = pg.transform.rotate(listSnake[0].image, degree)
     sf.blit(imageBackGround, imageBackGroundLocation)
     sf.blit(imageApple, transformLocationToCoordinate(imageAppleLocation))
-    sf.blit(ls[0].image, transformLocationToCoordinate(ls[0].location))
-    sf.blit(ls[1].image, transformLocationToCoordinate(ls[1].location))
-    sf.blit(ls[2].image, transformLocationToCoordinate(ls[2].location))
+    sf.blit(listSnake[0].image, transformLocationToCoordinate(listSnake[0].location))
+    sf.blit(listSnake[1].image, transformLocationToCoordinate(listSnake[1].location))
+    sf.blit(listSnake[2].image, transformLocationToCoordinate(listSnake[2].location))
     wd.blit(sf, (0, 0))
     pg.display.update()
 
 setLocation = set()
 
 gameStop = False
+
+hasMoved = False
