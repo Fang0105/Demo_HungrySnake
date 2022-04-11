@@ -47,15 +47,8 @@ listSnake = []
 
 direction = "right"
 
-def rotateSnakeHead(degree,sf,wd):
+def rotateSnakeHead(degree):
     listSnake[0].image = pg.transform.rotate(listSnake[0].image, degree)
-    sf.blit(imageBackGround, imageBackGroundLocation)
-    sf.blit(imageApple, transformLocationToCoordinate(imageAppleLocation))
-    sf.blit(listSnake[0].image, transformLocationToCoordinate(listSnake[0].location))
-    sf.blit(listSnake[1].image, transformLocationToCoordinate(listSnake[1].location))
-    sf.blit(listSnake[2].image, transformLocationToCoordinate(listSnake[2].location))
-    wd.blit(sf, (0, 0))
-    pg.display.update()
 
 setLocation = set()
 
