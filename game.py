@@ -11,6 +11,7 @@ def init():
     st.gameStop = False
     st.hasMoved = False
     st.shouldGenerateNewApple = False
+    st.score = 0
     st.listSnake.append(snake.SnakeHead((2,7), st.direction,0))
     st.listSnake.append(snake.SnakeBody((1, 7),1))
     st.listSnake.append(snake.SnakeBody((0, 7),2))
@@ -29,11 +30,13 @@ frame.sf.blit(st.txtLabelScore, st.txtLabelScore.get_rect(center=st.rectScoreTex
 frame.sf.blit(st.txtLabelRank, st.txtLabelRank.get_rect(center=st.rectRankText.center))
 frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
 
+init()
+
+st.drawClock(frame.sf)
 st.drawScore(frame.sf,frame.wd)
 
-init()
 pg.display.update()
-
+print(st.getClock())
 event.event()
 
 
