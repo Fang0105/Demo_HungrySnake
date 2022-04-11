@@ -36,7 +36,7 @@ def event():
                     st.drawScore(frame.sf,frame.wd)
                     frame.wd.blit(frame.sf,(0,0))
                     pg.display.update()
-                    pg.time.set_timer(SNAKEMOVEEVENT,150)
+                    pg.time.set_timer(SNAKEMOVEEVENT,130)
             elif ev.type == QUIT:
                 pg.quit()
                 sys.exit()
@@ -47,9 +47,9 @@ def event():
                         pass
                     else:
                         if st.listSnake[0].direction == "up":
-                            st.rotateSnakeHead(270,frame.sf,frame.wd)
+                            st.rotateSnakeHead(270)
                         elif st.listSnake[0].direction == "down":
-                            st.rotateSnakeHead(90,frame.sf,frame.wd)
+                            st.rotateSnakeHead(90)
                         st.listSnake[0].direction = "right"
                         pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_LEFT:
@@ -58,9 +58,9 @@ def event():
                         pass
                     else:
                         if st.listSnake[0].direction == "up":
-                            st.rotateSnakeHead(90,frame.sf,frame.wd)
+                            st.rotateSnakeHead(90)
                         elif st.listSnake[0].direction == "down":
-                            st.rotateSnakeHead(270,frame.sf,frame.wd)
+                            st.rotateSnakeHead(270)
                         st.listSnake[0].direction = "left"
                         pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_UP:
@@ -69,9 +69,9 @@ def event():
                         pass
                     else:
                         if st.listSnake[0].direction == "right":
-                            st.rotateSnakeHead(90,frame.sf,frame.wd)
+                            st.rotateSnakeHead(90)
                         elif st.listSnake[0].direction == "left":
-                            st.rotateSnakeHead(270,frame.sf,frame.wd)
+                            st.rotateSnakeHead(270)
                         st.listSnake[0].direction = "up"
                         pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_DOWN:
@@ -80,8 +80,8 @@ def event():
                         pass
                     else:
                         if st.listSnake[0].direction == "right":
-                            st.rotateSnakeHead(270,frame.sf,frame.wd)
+                            st.rotateSnakeHead(270)
                         elif st.listSnake[0].direction == "left":
-                            st.rotateSnakeHead(90,frame.sf,frame.wd)
+                            st.rotateSnakeHead(90)
                         st.listSnake[0].direction = "down"
                         pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
