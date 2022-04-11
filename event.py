@@ -6,27 +6,32 @@ from pygame.locals import QUIT
 import frame
 import snake
 
-
+SNAKEMOVEEVENT = pg.USEREVENT + 0
 
 CHECKHASMOVEDEVENT = pg.USEREVENT + 1
 pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
 
-SNAKEMOVEEVENT = pg.USEREVENT + 0
+CLOCKEVENT = pg.USEREVENT + 2
 
 def event():
     while True:
         for ev in pg.event.get():
-            if ev.type == CHECKHASMOVEDEVENT:
+            if ev.type == CLOCKEVENT:
+                st.addOneSecond()
+                st.drawClock(frame.sf)
+                frame.wd.blit(frame.sf,(0,0))
+                pg.display.update()
+            elif ev.type == CHECKHASMOVEDEVENT:
                 if st.hasMoved == False:
                     pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
                 else:
+                    pg.time.set_timer(CLOCKEVENT, 1000)
                     pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
             elif ev.type == SNAKEMOVEEVENT:
                 if st.gameStop == True:
                     pg.time.set_timer(SNAKEMOVEEVENT,0)
+                    pg.time.set_timer(CLOCKEVENT,0)
                     pg.event.clear()
-                    print(st.score)
-                    print(len(st.listSnake))
                 else:
                     snake.snakeMove()
                     frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
