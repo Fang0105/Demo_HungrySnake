@@ -4,6 +4,7 @@ import setting as st
 from pygame import *
 from pygame.locals import QUIT
 import frame
+import snake
 
 
 
@@ -19,20 +20,23 @@ def event():
                 if st.hasMoved == False:
                     pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
                 else:
-                    pg.time.set_timer(SNAKEMOVEEVENT,150)
+                    pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
             elif ev.type == SNAKEMOVEEVENT:
                 if st.gameStop == True:
                     pg.time.set_timer(SNAKEMOVEEVENT,0)
                     pg.event.clear()
+                    print(st.score)
+                    print(len(st.listSnake))
                 else:
-                    st.listSnake[0].move()
+                    snake.snakeMove()
                     frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
                     frame.sf.blit(st.imageApple, st.transformLocationToCoordinate(st.imageAppleLocation))
-                    frame.sf.blit(st.listSnake[0].image, st.transformLocationToCoordinate(st.listSnake[0].location))
-                    frame.sf.blit(st.listSnake[1].image, st.transformLocationToCoordinate(st.listSnake[1].location))
-                    frame.sf.blit(st.listSnake[2].image, st.transformLocationToCoordinate(st.listSnake[2].location))
-                    frame.wd.blit(frame.sf, (0, 0))
+                    for i in st.listSnake:
+                        frame.sf.blit(i.image,st.transformLocationToCoordinate(i.location))
+                    st.drawScore(frame.sf,frame.wd)
+                    frame.wd.blit(frame.sf,(0,0))
                     pg.display.update()
+                    pg.time.set_timer(SNAKEMOVEEVENT,150)
             elif ev.type == QUIT:
                 pg.quit()
                 sys.exit()
@@ -47,6 +51,7 @@ def event():
                         elif st.listSnake[0].direction == "down":
                             st.rotateSnakeHead(90,frame.sf,frame.wd)
                         st.listSnake[0].direction = "right"
+                        pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_LEFT:
                     st.hasMoved = True
                     if st.listSnake[0].direction == "right":
@@ -57,6 +62,7 @@ def event():
                         elif st.listSnake[0].direction == "down":
                             st.rotateSnakeHead(270,frame.sf,frame.wd)
                         st.listSnake[0].direction = "left"
+                        pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_UP:
                     st.hasMoved = True
                     if st.listSnake[0].direction == "down":
@@ -67,6 +73,7 @@ def event():
                         elif st.listSnake[0].direction == "left":
                             st.rotateSnakeHead(270,frame.sf,frame.wd)
                         st.listSnake[0].direction = "up"
+                        pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
                 elif ev.key == K_DOWN:
                     st.hasMoved = True
                     if st.listSnake[0].direction == "up":
@@ -77,4 +84,4 @@ def event():
                         elif st.listSnake[0].direction == "left":
                             st.rotateSnakeHead(90,frame.sf,frame.wd)
                         st.listSnake[0].direction = "down"
-                #print(st.listSnake[0].direction)
+                        pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
