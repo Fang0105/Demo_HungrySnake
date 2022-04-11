@@ -14,8 +14,7 @@ def drawApple():
     frame.sf.blit(st.imageApple, getRandomAppleCoordinate())
 
 def generateNewApple():
-
-    st.setLocation.remove(st.imageAppleLocation)
+    st.shouldGenerateNewApple = False
     frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
     frame.sf.blit(st.imageApple, getRandomAppleCoordinate())
     frame.wd.blit(frame.sf, (0, 0))
