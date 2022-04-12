@@ -5,6 +5,7 @@ import event
 import pygame as pg
 import frame
 
+
 def init():
     st.listSnake.clear()
     st.setLocation.clear()
@@ -19,6 +20,7 @@ def init():
         frame.sf.blit(i.image,st.transformLocationToCoordinate(i.location))
         st.setLocation.add(i.location)
     apple.drawApple()
+    st.drawRank(frame.sf)
     frame.wd.blit(frame.sf, (0, 0))
 
 
@@ -36,7 +38,6 @@ st.drawClock(frame.sf)
 st.drawScore(frame.sf,frame.wd)
 
 pg.display.update()
-print(st.getClock())
 event.event()
 
 
