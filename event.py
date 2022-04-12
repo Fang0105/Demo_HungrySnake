@@ -1,10 +1,12 @@
 import pygame as pg
 import sys
 import setting as st
+import pandas as pd
 from pygame import *
 from pygame.locals import QUIT
 import frame
 import snake
+import rank
 
 SNAKEMOVEEVENT = pg.USEREVENT + 0
 
@@ -32,6 +34,15 @@ def event():
                     pg.time.set_timer(SNAKEMOVEEVENT,0)
                     pg.time.set_timer(CLOCKEVENT,0)
                     pg.event.clear()
+                    rank.df = pd.concat([rank.df,pd.DataFrame({
+                        "score":[st.score],
+                        "time":[st.getClock()]
+                    })],axis=0)
+                    rank.sort()
+                    rank.doRecord()
+                    st.drawRank(frame.sf)
+                    frame.wd.blit(frame.sf,(0,0))
+                    pg.display.update()
                 else:
                     snake.snakeMove()
                     frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
@@ -41,7 +52,7 @@ def event():
                     st.drawScore(frame.sf,frame.wd)
                     frame.wd.blit(frame.sf,(0,0))
                     pg.display.update()
-                    pg.time.set_timer(SNAKEMOVEEVENT,130)
+                    pg.time.set_timer(SNAKEMOVEEVENT,150)
             elif ev.type == QUIT:
                 pg.quit()
                 sys.exit()
