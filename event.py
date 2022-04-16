@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+import regame
 import setting as st
 import pandas as pd
 from pygame import *
@@ -11,14 +12,20 @@ import rank
 SNAKEMOVEEVENT = pg.USEREVENT + 0
 
 CHECKHASMOVEDEVENT = pg.USEREVENT + 1
-pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
 
 CLOCKEVENT = pg.USEREVENT + 2
-
 def event():
+    pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
     while True:
         for ev in pg.event.get():
-            if ev.type == CLOCKEVENT:
+            if ev.type == pg.MOUSEBUTTONDOWN:
+                if st.gameStop == True:
+                    pos = (ev.pos[0]-373,ev.pos[1]-290)
+                    if regame.rectYes.collidepoint(pos):
+                        return True
+                    if regame.rectNo.collidepoint(pos):
+                        return False
+            elif ev.type == CLOCKEVENT:
                 st.addOneSecond()
                 st.drawClock(frame.sf)
                 frame.wd.blit(frame.sf,(0,0))
@@ -42,6 +49,7 @@ def event():
                     rank.doRecord()
                     st.drawRank(frame.sf)
                     frame.wd.blit(frame.sf,(0,0))
+                    frame.wd.blit(regame.renew(st.score==253),st.newSurfaceLocation)
                     pg.display.update()
                 else:
                     snake.snakeMove()
