@@ -115,3 +115,6 @@ def drawRank(sf):
         rectRecordTime = pg.Rect(130, 477.5+50*i, 92.5, 50)
         pg.draw.rect(sf, (255, 0, 0), rectRecordTime)
         sf.blit(txtRecordTime, txtRecordTime.get_rect(center=rectRecordTime.center))
+
+newSurfaceSize = (windowsSize[0]/4,windowsSize[1]/4)
+newSurfaceLocation = (windowsSize[0]*3/8,windowsSize[1]*3/8)
