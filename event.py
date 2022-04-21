@@ -52,15 +52,18 @@ def event():
                     frame.wd.blit(regame.renew(st.score==253),st.newSurfaceLocation)
                     pg.display.update()
                 else:
-                    snake.snakeMove()
-                    frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
-                    frame.sf.blit(st.imageApple, st.transformLocationToCoordinate(st.imageAppleLocation))
-                    for i in st.listSnake:
-                        frame.sf.blit(i.image,st.transformLocationToCoordinate(i.location))
-                    st.drawScore(frame.sf,frame.wd)
-                    frame.wd.blit(frame.sf,(0,0))
-                    pg.display.update()
-                    pg.time.set_timer(SNAKEMOVEEVENT,150)
+                    if st.score==253:
+                        st.gameStop = True
+                    else:
+                        snake.snakeMove()
+                        frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
+                        frame.sf.blit(st.imageApple, st.transformLocationToCoordinate(st.imageAppleLocation))
+                        for i in st.listSnake:
+                            frame.sf.blit(i.image,st.transformLocationToCoordinate(i.location))
+                        st.drawScore(frame.sf,frame.wd)
+                        frame.wd.blit(frame.sf,(0,0))
+                        pg.display.update()
+                        pg.time.set_timer(SNAKEMOVEEVENT,130)
             elif ev.type == QUIT:
                 pg.quit()
                 sys.exit()
