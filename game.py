@@ -7,6 +7,7 @@ import frame
 import rank
 import pandas as pd
 
+
 pg.draw.rect(frame.sf, (255, 0, 0), st.rectTimeText)
 pg.draw.rect(frame.sf, (255, 0, 0), st.rectScoreText)
 pg.draw.rect(frame.sf, (255, 0, 0), st.rectRankText)
