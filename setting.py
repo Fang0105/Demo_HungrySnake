@@ -1,6 +1,10 @@
 import pygame as pg
 import pandas as pd
 
+'''
+常用變數宣告及幫法實作
+'''
+
 pg.init()
 windowsSize=(1000,777.5)
 gameName='Hungry Snake'
@@ -22,10 +26,12 @@ rectScoreText = pg.Rect(0,200,222.5,50)
 txtLabelRank = font.render("RANK",True,(255,255,0))
 rectRankText = pg.Rect(0,400,222.5,50)
 
+#將圖上座標轉換成螢幕座標
 def transformLocationToCoordinate(location):
     location = (222.5+latticeSize*location[0],latticeSize*location[1])
     return location
 
+#繪製分數
 def drawScore(sf,wd):
     fontScore = pg.font.Font(None, 190)
     txtScore = fontScore.render(str(score), True, (255, 255, 0))
@@ -48,6 +54,7 @@ listSnake = []
 
 direction = "right"
 
+#蛇頭的旋轉
 def rotateSnakeHead(degree):
     listSnake[0].image = pg.transform.rotate(listSnake[0].image, degree)
 
@@ -61,6 +68,7 @@ hasMoved = False
 
 minute = 0
 second = 0
+#取得符合遊戲時間顯示方式的時間格式
 def getClock():
     strSecond = str(second)
     strMinute = str(minute)
@@ -70,6 +78,7 @@ def getClock():
         strMinute = "0"+strMinute
     return (strMinute+":"+strSecond)
 
+#遊戲時間增加1秒
 def addOneSecond():
     global second
     global minute
@@ -77,6 +86,8 @@ def addOneSecond():
     if second == 60:
         second = 0
         minute += 1
+
+#繪製遊戲時間
 def drawClock(sf):
     fontClock = pg.font.Font(None, 120)
     txtClock = fontClock.render(getClock(), True, (255, 255, 0))
@@ -84,6 +95,7 @@ def drawClock(sf):
     pg.draw.rect(sf, (255, 0, 255), rectClock)
     sf.blit(txtClock,txtClock.get_rect(center=rectClock.center))
 
+#繪製排行榜
 def drawRank(sf):
     record = pd.read_csv("record.csv")
     fontRank = pg.font.Font(None,30)

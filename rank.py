@@ -2,8 +2,13 @@ import pandas as pd
 import os
 from pandas.api.types import CategoricalDtype
 
+'''
+讀取和寫入當次遊戲的紀錄並排序
+'''
+
 scoreList = []
 timeList = []
+#排序分數(由253~0)及時間(由00:00~99:59)
 def order():
     for i in range (253,-1,-1):
         scoreList.append(i)
@@ -32,13 +37,13 @@ if (os.path.isfile("record.csv")==False):
     }
     initDf = pd.DataFrame(rankInit)
     initDf.to_csv("record.csv",index=False)
-
+#自訂義排序方式:分數 -> 時間
 def sort():
     global df
     df["score"] = df["score"].astype(scoreSort)
     df["time"] = df["time"].astype(timeSort)
     df = df.sort_values(["score", "time"])
-
+#將此次紀錄寫入record.csv並排序
 def doRecord():
     global df
     old = pd.read_csv("record.csv")

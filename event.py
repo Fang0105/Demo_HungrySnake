@@ -9,15 +9,25 @@ import frame
 import snake
 import rank
 
+'''
+處理所有事件
+'''
+
+#蛇移動
 SNAKEMOVEEVENT = pg.USEREVENT + 0
 
+#檢查蛇是否已經移動
 CHECKHASMOVEDEVENT = pg.USEREVENT + 1
 
+#增加遊戲時間
 CLOCKEVENT = pg.USEREVENT + 2
+
+#處理事件的迴圈並回傳是否再來一局
 def event():
     pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
     while True:
         for ev in pg.event.get():
+            #判斷是否在來一局
             if ev.type == pg.MOUSEBUTTONDOWN:
                 if st.gameStop == True:
                     pos = (ev.pos[0]-373,ev.pos[1]-290)
@@ -25,17 +35,20 @@ def event():
                         return True
                     if regame.rectNo.collidepoint(pos):
                         return False
+            #增加遊戲時間
             elif ev.type == CLOCKEVENT:
                 st.addOneSecond()
                 st.drawClock(frame.sf)
                 frame.wd.blit(frame.sf,(0,0))
                 pg.display.update()
+            #檢查蛇是否已經移動
             elif ev.type == CHECKHASMOVEDEVENT:
                 if st.hasMoved == False:
                     pg.event.post(pg.event.Event(CHECKHASMOVEDEVENT))
                 else:
                     pg.time.set_timer(CLOCKEVENT, 1000)
                     pg.event.post(pg.event.Event(SNAKEMOVEEVENT))
+            #蛇往行進方向移動一格
             elif ev.type == SNAKEMOVEEVENT:
                 if st.gameStop == True:
                     pg.time.set_timer(SNAKEMOVEEVENT,0)
@@ -67,6 +80,7 @@ def event():
             elif ev.type == QUIT:
                 pg.quit()
                 sys.exit()
+            #蛇的轉向
             elif ev.type == KEYDOWN:
                 if ev.key == K_RIGHT:
                     st.hasMoved = True

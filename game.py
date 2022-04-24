@@ -7,6 +7,10 @@ import frame
 import rank
 import pandas as pd
 
+'''
+繪製基本文字
+開始一局遊戲
+'''
 
 pg.draw.rect(frame.sf, (255, 0, 0), st.rectTimeText)
 pg.draw.rect(frame.sf, (255, 0, 0), st.rectScoreText)
@@ -16,6 +20,7 @@ frame.sf.blit(st.txtLabelScore, st.txtLabelScore.get_rect(center=st.rectScoreTex
 frame.sf.blit(st.txtLabelRank, st.txtLabelRank.get_rect(center=st.rectRankText.center))
 frame.sf.blit(st.imageBackGround, st.imageBackGroundLocation)
 
+#開始一局新遊戲
 def init():
     st.listSnake.clear()
     st.setLocation.clear()

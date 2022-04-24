@@ -1,6 +1,10 @@
 import pygame as pg
 import setting as st
 
+'''
+繪製遊戲主要視窗
+'''
+
 pg.init()
 
 #設定視窗
